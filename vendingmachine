@@ -28,7 +28,7 @@ begin
 end;
 
 var
-    a,b,c,d,e, bank:integer;
+    e, bank:integer;
     p: char;
     flag, flag2: boolean;
     product1: Product:= new Product('Бутылка воды', 100);
