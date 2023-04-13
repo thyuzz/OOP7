@@ -1,0 +1,117 @@
+type
+  Product = class
+  private
+    fName: string;
+    fPrice: integer;
+  public
+    constructor Create(Name: string; Price: integer);
+    begin
+      fName:= Name;
+      fPrice:= Price;
+    end;
+    procedure Print;
+    property Name: string read fName;
+    property Price: integer read fPrice;
+  end;
+
+procedure Product.Print;
+begin
+  Writeln($'Имя: {Name} Цена: {Price}');
+end;
+
+function bankAdd(bank: integer): integer;
+var
+  a: integer;
+begin
+  readln(a);
+  Result:= bank + a;
+end;
+
+var
+    a,b,c,d,e, bank:integer;
+    p: char;
+    flag, flag2: boolean;
+    product1: Product:= new Product('Бутылка воды', 100);
+    product2: Product:= new Product('Чашка кофе', 150);
+    product3: Product:= new Product('Чашка чая', 130);
+
+begin
+  
+   flag:= false;
+   while (flag = false) do
+   begin
+    writeln('Вас преветствует торговый аппарат.');
+    writeln('Хотите посмотреть наличие товаров и их стоимость?');
+    write('Введите "+", если да, "-", если нет.');
+    readln(p);
+    case p of
+      '+': 
+      begin 
+        flag:= true;
+        writeln('1 - ' , product1);
+        writeln('2 - ' ,product2);
+        writeln('3 - ' ,product3);
+      end;
+     '-': writeln('Перезапускаюсь.');
+    end;
+    writeln('Нажмите enter, чтобы продолжить');
+    readln;
+  end;
+   
+   
+   write('Вложите деньги в автомат: ');
+   readln(bank);
+   
+   write('Нажмите на кнопку товара, который вы хотите купить: ');
+   readln(e);
+   
+   while flag2 = false do
+     begin
+   case e of
+     1:
+      begin
+        if (product1.Price <= bank) then
+          begin
+            bank:= bank - product1.Price;
+            write('Вы купили бутылку воды.');
+            flag2:= true;
+          end
+        else
+          begin
+           write('Недостаточно средств. Доложите: ');
+           bank:= bankAdd(bank);
+          end;
+      end;
+     2:
+      begin
+        if (product2.Price <= bank) then
+          begin
+            bank:= bank - product2.Price;
+            write('Вы купили бутылку воды.');
+            flag2:= true;
+          end
+        else
+          begin
+           write('Недостаточно средств. Доложите: ');
+           bank:= bankAdd(bank);
+          end;
+      end;
+     3:
+      begin
+        if (product3.Price <= bank) then
+          begin
+            bank:= bank - product3.Price;
+            write('Вы купили бутылку воды.');
+            flag2:= true;
+          end
+        else
+          begin
+           write('Недостаточно средств. Доложите: ');
+           bank:= bankAdd(bank);
+          end;
+      end;
+   end;
+   end;
+   writeln();
+   writeln('Ваша сдача: ', bank);  
+end.
